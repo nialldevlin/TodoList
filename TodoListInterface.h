@@ -4,13 +4,19 @@
 #include <iostream>
 #include <string>
 #include <fstream>
+#include <vector>
 
 using namespace std;
 
 class TodoListInterface {
 private:
     string filename;
-    fstream file;
+    ifstream filein;
+    ofstream fileout;
+    vector<vector<string>> todo_list;
+    int curr_todo_id;
+
+    void getTodoListFromFile();
         
 public:
     TodoListInterface(string f);
@@ -31,12 +37,14 @@ public:
     /*
     *   Prints out the full todo list to the console
     */
-    virtual void printTodoList() = 0;
+    virtual void printTodoList();
     
     /*
     *   Prints out all items of a todo list with a particular due date (specified by _duedate)
     */
-    virtual void printDaysTasks(string _date) = 0;
+    virtual void printDaysTasks(string _date);
+    
+    void TodoToFile();    
 };
 
 #endif
